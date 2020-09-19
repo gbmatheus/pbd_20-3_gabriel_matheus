@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.gabrielmatheus.eniatusapi.domain.exceptions.NegocioException;
 import com.gabrielmatheus.eniatusapi.domain.models.Funcionario;
 import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioService;
+import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioServices.CadastroFuncionario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,9 @@ public class FuncionarioController {
   @Autowired
   private FuncionarioService funcionarioService;
 
+  @Autowired
+  private CadastroFuncionario cadastroFuncionarioService;
+
   @GetMapping
   public List<Funcionario> index() {
     return funcionarioService.findAll();
@@ -36,7 +41,15 @@ public class FuncionarioController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Funcionario create(@Valid @RequestBody Funcionario f) {
-    return funcionarioService.save(f);
+    Funcionario funcionario = cadastroFuncionarioService.create(f);
+
+    if(funcionario == null) {
+      System.out.println("Funcionario nulo");
+      new NegocioException("Erro");
+    }
+
+    return funcionario;
+    // return funcionarioService.save(f);
   }
 
   @GetMapping("/{funcionadioID}")
