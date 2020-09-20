@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.gabrielmatheus.eniatusapi.domain.exceptions.NegocioException;
 import com.gabrielmatheus.eniatusapi.domain.models.Funcionario;
 import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioService;
 import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioServices.CadastroFuncionario;
@@ -45,7 +44,6 @@ public class FuncionarioController {
 
     if(funcionario == null) {
       System.out.println("Funcionario nulo");
-      new NegocioException("Erro");
     }
 
     return funcionario;
