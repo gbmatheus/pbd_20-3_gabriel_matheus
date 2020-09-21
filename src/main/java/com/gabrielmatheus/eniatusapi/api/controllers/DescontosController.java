@@ -6,13 +6,11 @@ import java.util.Optional;
 import com.gabrielmatheus.eniatusapi.domain.models.Descontos;
 import com.gabrielmatheus.eniatusapi.domain.models.OutrosDescontos;
 import com.gabrielmatheus.eniatusapi.domain.repositories.DescontosRepository;
-import com.gabrielmatheus.eniatusapi.domain.services.OutrosDescontosService;
+// import com.gabrielmatheus.eniatusapi.domain.services.OutrosDescontosService;
+// import com.gabrielmatheus.eniatusapi.domain.services.DescontoServices.CalcularDescontosServices;
 import com.gabrielmatheus.eniatusapi.domain.services.DescontoServices.AddOutrosDescontosServices;
-import com.gabrielmatheus.eniatusapi.domain.services.DescontoServices.CalcularDescontosServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +26,11 @@ public class DescontosController {
   @Autowired
   private DescontosRepository descontosRepository;
 
-  @Autowired
-  private OutrosDescontosService outrosDescontosService;
+  // @Autowired
+  // private OutrosDescontosService outrosDescontosService;
 
-  @Autowired
-  private CalcularDescontosServices calcularDescontosServices;
+  // @Autowired
+  // private CalcularDescontosServices calcularDescontosServices;
 
   @Autowired
   private AddOutrosDescontosServices addOutrosDescontosServices;

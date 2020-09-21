@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import com.gabrielmatheus.eniatusapi.domain.exceptions.BusinessException;
 import com.gabrielmatheus.eniatusapi.domain.models.Funcionario;
 import com.gabrielmatheus.eniatusapi.domain.models.Pessoa;
 import com.gabrielmatheus.eniatusapi.domain.models.Salario;
@@ -20,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CadastroFuncionario {
+public class CadastroFuncionarioService {
 
   // funcionario
   // dados da pessoa
@@ -51,7 +52,7 @@ public class CadastroFuncionario {
        * Adicionar uma exception
        */
       System.out.println("Funcionario já existe");
-      return null;
+      throw new BusinessException("Funcionário já existe");
     }
 
     Salario salario = createSalario(funcionario.getTipo(), funcionario.getSalario());
@@ -60,7 +61,7 @@ public class CadastroFuncionario {
        * Adicionar uma exception
        */
       System.out.println("Salario minimo não existe");
-      return null;
+      throw new BusinessException("Nenhum salário mínimo cadastrado");
     }
     
     funcionario.setPessoa(pessoa);
@@ -106,7 +107,7 @@ public class CadastroFuncionario {
          * Adicionar uma exception
          */
         System.out.println("Salario minimo não existe");
-        return null;
+        throw new BusinessException("Salário minimo não existe");
       }
 
       salario.setQuantSemanas(quantSemanas);

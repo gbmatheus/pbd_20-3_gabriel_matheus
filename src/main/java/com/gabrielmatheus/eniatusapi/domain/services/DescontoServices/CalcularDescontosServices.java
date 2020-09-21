@@ -4,12 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.gabrielmatheus.eniatusapi.domain.exceptions.BusinessException;
 import com.gabrielmatheus.eniatusapi.domain.models.Inss;
 import com.gabrielmatheus.eniatusapi.domain.models.Irrf;
-import com.gabrielmatheus.eniatusapi.domain.repositories.FuncionarioRepository;
 import com.gabrielmatheus.eniatusapi.domain.repositories.InssRepository;
 import com.gabrielmatheus.eniatusapi.domain.repositories.IrrfRepository;
-import com.gabrielmatheus.eniatusapi.domain.repositories.OutrosDescontosRepository;
 import com.gabrielmatheus.eniatusapi.domain.utils.MC;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ public class CalcularDescontosServices {
 
   private final InssRepository inssRepository;
   private final IrrfRepository irrfRepository;
-  private final OutrosDescontosRepository outrosDescontosRepository;
 
   /**
    * Descontos descontos 
@@ -38,11 +36,9 @@ public class CalcularDescontosServices {
    */
 
 
-  public CalcularDescontosServices(InssRepository inssRepository, IrrfRepository irrfRepository,
-      OutrosDescontosRepository outrosDescontosRepository) {
+  public CalcularDescontosServices(InssRepository inssRepository, IrrfRepository irrfRepository) {
     this.inssRepository = inssRepository;
     this.irrfRepository = irrfRepository;
-    this.outrosDescontosRepository = outrosDescontosRepository;
   }
 
   
@@ -60,6 +56,7 @@ public class CalcularDescontosServices {
        */
       if(!inssLista.isEmpty()) {
         System.out.println("vazio");
+        throw new BusinessException("Nenhum inss cadastrado");
       }
       
       Integer indexUltimoElemento = inssLista.size() - 1;
@@ -86,7 +83,7 @@ public class CalcularDescontosServices {
           return i;
         }
       }
-      return null;
+      throw new BusinessException("Vázio");
     }
 
     for (Inss i : inssAtual) {
@@ -108,7 +105,7 @@ public class CalcularDescontosServices {
       }
     }
     
-    return null;
+    throw new BusinessException("Vázio");
   }
 
     
@@ -120,11 +117,10 @@ public class CalcularDescontosServices {
       /**
        * Adicionar exception
        */
-      return null;
+      throw new BusinessException("Nenhum INSS cadastrado");
     }
 
     if(inssAtual.isEmpty()) {
-      System.out.println("vazio");
       Integer anoAnterior = anoAtual - 1;
       verificarInssRecursiva(salario, anoAnterior);
     }
@@ -148,7 +144,7 @@ public class CalcularDescontosServices {
       }
     }
     
-    return null;
+    throw new BusinessException("Nenhum INSS corresponde ao salário");
   }
 
   public Irrf verificarIrrf() {
@@ -204,7 +200,7 @@ public class CalcularDescontosServices {
         return i;
       }
     }
-    return null;
+    throw new BusinessException("Nenhum IRFF corresponde ao salário");
   }
 
 
@@ -212,7 +208,7 @@ public class CalcularDescontosServices {
     // Teste criar variavel;
     if(irrfRepository.findAll().isEmpty()){
       // Adicionar uma exception
-      return null;
+      throw new BusinessException("Nenhum salário cadastrado");
     }
     List<Irrf> irrfAtual = irrfRepository.findByVigencia(anoAtual);
     
@@ -240,11 +236,10 @@ public class CalcularDescontosServices {
         return i;
       }
     }
-    return null;
+    throw new BusinessException("Nenhum IRRF corresponde ao salário");
   }
 
   public void addOutrosDescontos() {
-    
     
   }
 
