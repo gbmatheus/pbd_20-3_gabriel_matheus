@@ -1,16 +1,11 @@
 package com.gabrielmatheus.eniatusapi.domain.models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,21 +15,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "outros_descontos")
-public class OutrosDescontos {
+public class Proventos {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank
-  private String descricao;
+  // obrigatorio
+  private BigDecimal salario;
+  // se houver
+  private BigDecimal adicionalTempoServico;
+  // se houver
+  private Integer horaExtra;
+  // se houver
+  private BigDecimal auxAlimentacao;
 
-  @NotNull
-  private BigDecimal valor;
+  private BigDecimal salarioBruto;
 
-  private LocalDateTime dataDesconto;
-
-  @ManyToOne
-  private Descontos descontos;
 }

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import com.gabrielmatheus.eniatusapi.domain.models.Funcionario;
 import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioService;
+import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioServices.CadastroFuncionarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,9 @@ public class FuncionarioController {
   @Autowired
   private FuncionarioService funcionarioService;
 
+  @Autowired
+  private CadastroFuncionarioService cadastroFuncionarioService;
+
   @GetMapping
   public List<Funcionario> index() {
     return funcionarioService.findAll();
@@ -36,12 +40,12 @@ public class FuncionarioController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Funcionario create(@Valid @RequestBody Funcionario f) {
-    return funcionarioService.save(f);
+    return cadastroFuncionarioService.create(f);
   }
 
-  @GetMapping("/{funcionadioID}")
-  public ResponseEntity<Funcionario> show(@PathVariable Long funcionarioID) {
-    Optional<Funcionario> funcionario = funcionarioService.findById(funcionarioID);
+  @GetMapping("/{id}")
+  public ResponseEntity<Funcionario> show(@PathVariable Long id) {
+    Optional<Funcionario> funcionario = funcionarioService.findById(id);
 
     if (funcionario.isPresent()) {
       return ResponseEntity.ok(funcionario.get());
@@ -51,11 +55,11 @@ public class FuncionarioController {
 
   }  
 
-  @PutMapping("/{funcionarioID}")
-  public ResponseEntity<Funcionario> update(@PathVariable Long funcionarioID,
+  @PutMapping("/{id}")
+  public ResponseEntity<Funcionario> update(@PathVariable Long id,
     @RequestBody Funcionario f) {
       
-      Funcionario funcionario = funcionarioService.update(f, funcionarioID);
+      Funcionario funcionario = funcionarioService.update(f, id);
 
       if(funcionario == null)
         return ResponseEntity.notFound().build();
@@ -63,9 +67,9 @@ public class FuncionarioController {
       return ResponseEntity.ok(funcionario);
     }
 
-  @DeleteMapping("/{funcionarioID}")
-  public ResponseEntity<Void> delete (Long funcionarioID) {
-    if(!funcionarioService.delete(funcionarioID)) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete (@PathVariable Long id) {
+    if(!funcionarioService.delete(id)) {
       return ResponseEntity.notFound().build();
     }
 
