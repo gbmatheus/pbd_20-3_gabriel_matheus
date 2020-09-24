@@ -1,5 +1,7 @@
 package com.gabrielmatheus.eniatusapi.domain.services;
 
+import java.time.LocalDateTime;
+
 import com.gabrielmatheus.eniatusapi.domain.models.OutrosDescontos;
 import com.gabrielmatheus.eniatusapi.domain.repositories.OutrosDescontosRepository;
 
@@ -16,6 +18,12 @@ public class OutrosDescontosService extends ServiceGeneric<OutrosDescontos> {
   @Override
   public JpaRepository<OutrosDescontos, Long> getRepository() {
     return outrosDescontosRepository;
+  }
+
+  @Override
+  public OutrosDescontos save(OutrosDescontos outrosDescontos) {
+    outrosDescontos.setDataDesconto(LocalDateTime.now());
+    return getRepository().save(outrosDescontos);
   }
 
   @Override
