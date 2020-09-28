@@ -1,8 +1,8 @@
-package com.gabrielmatheus.eniatusapi.domain.repositories;
+package com.gabrielmatheus.eniatusapi.domain.repositories.usuario;
 
 import java.util.Optional;
 
-import com.gabrielmatheus.eniatusapi.domain.models.Usuario;
+import com.gabrielmatheus.eniatusapi.domain.models.usuario.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
