@@ -36,14 +36,15 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter{
   @Override
   public void configure(HttpSecurity http) throws Exception {
     http
+      .csrf().disable()
       .httpBasic()
       .and()
       .authorizeRequests()
-      .antMatchers("/api/usuarios/**").hasAuthority("ADMIN") // Só admin pode acessar
+      .antMatchers("/api/usuarios/**").permitAll()// Só admin pode acessar
+      .antMatchers("/api/funcionarios/**").hasAuthority("ADMIN") // Só admin pode acessar
       .anyRequest()
       .authenticated()
       .and()
-      .csrf().disable()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
   }
 
@@ -83,22 +84,22 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter{
   */
 
   // @Bean
-  // public PasswordEncoder passwordEncoder() {
-  //   // return NoOpPasswordEncoder.getInstance();
-  //   Utilizar cast do password encoder
-  //   return new BCryptPasswordEncoder();
-  // }
-
-  @Bean
   public PasswordEncoder passwordEncoder() {
-
-    DelegatingPasswordEncoder delegatingPasswordEncoder = 
-        (DelegatingPasswordEncoder) PasswordEncoderFactories
-            .createDelegatingPasswordEncoder();
-
-    delegatingPasswordEncoder
-          .setDefaultPasswordEncoderForMatches(new BCryptPasswordEncoder());
-
-    return delegatingPasswordEncoder;
+    // return NoOpPasswordEncoder.getInstance();
+    // Utilizar cast do password encoder
+    return new BCryptPasswordEncoder();
   }
+
+  // @Bean
+  // public PasswordEncoder passwordEncoder() {
+
+  //   DelegatingPasswordEncoder delegatingPasswordEncoder = 
+  //       (DelegatingPasswordEncoder) PasswordEncoderFactories
+  //           .createDelegatingPasswordEncoder();
+
+  //   delegatingPasswordEncoder
+  //         .setDefaultPasswordEncoderForMatches(new BCryptPasswordEncoder());
+
+  //   return delegatingPasswordEncoder;
+  // }
 }

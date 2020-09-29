@@ -22,14 +22,25 @@ public class AlterarSenhaService {
 
     Usuario usuario = usuarioRepository.findById(id)
       .orElseThrow(() -> new BusinessException("Usuário não encontrado"));
+    
+    String senhaCrypt = passwordEncoder().encode(senhaDto.getNovaSenha());
 
-    if(!usuario.getSenha().equalsIgnoreCase(senhaDto.getSenha())
-      || !passwordEncoder().matches(senhaDto.getSenha(), usuario.getSenha())
+    System.out.println("Senha do usuario " + usuario.getSenha());
+    System.out.println("Senha dto encode " + passwordEncoder().encode(senhaDto.getSenha()));
+    System.out.println("Senha dto " + senhaDto.getSenha());
+    System.out.println("Senha nova " + senhaCrypt);
+
+    boolean isSenha = passwordEncoder().matches(senhaDto.getSenha(), usuario.getSenha());
+    System.out.println(isSenha == true ? "Senha corresponde" : "Senha não corresponde");
+
+    if(
+      // !usuario.getSenha().equalsIgnoreCase(senhaDto.getSenha())
+      // || 
+      !passwordEncoder().matches(senhaDto.getSenha(), usuario.getSenha())
     ) {
       throw new BusinessException("Senha antiga incorreta");
     }
 
-    String senhaCrypt = passwordEncoder().encode(senhaDto.getNovaSenha());
     // String senhaCrypt = Crypt.passwordEncoder().encode(senhaDto.getNovaSenha());
     System.out.println("Senha :" + senhaDto.getSenha() + "\nSenha crypto:" + senhaCrypt);
     

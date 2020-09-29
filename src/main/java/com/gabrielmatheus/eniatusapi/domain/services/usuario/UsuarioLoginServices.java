@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.gabrielmatheus.eniatusapi.domain.models.usuario.Usuario;
 import com.gabrielmatheus.eniatusapi.domain.repositories.usuario.UsuarioRepository;
+import com.gabrielmatheus.eniatusapi.domain.utils.Crypt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,9 +25,16 @@ public class UsuarioLoginServices implements UserDetailsService {
     
     Optional<Usuario> usuario = usuarioRepository.findByLogin(login);
 
+    System.out.println("senha do banco " + new Crypt().encode(usuario.get().getSenha()));
+
     if (!usuario.isPresent()) {
       throw new UsernameNotFoundException("Usuário não existe");
     }
+    // System.out.println("Usuario " + usuario.get().getLogin());
+    // System.out.println("Usuario " + usuario.get().getSenha());
+
+    // if(!new Crypt().matches(usuario.get().getSenha(), ))
+
     
     // verificar se password é igual
     return new UsuarioSistema(usuario.get());
