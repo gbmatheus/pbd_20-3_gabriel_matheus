@@ -41,7 +41,7 @@ public class Usuario {
 
   @Column(length = 100)
   @NotBlank
-  @Size(min = 6, max = 11)
+  @Size(min = 6)
   private String senha;
 
   @ManyToMany(fetch = FetchType.EAGER)

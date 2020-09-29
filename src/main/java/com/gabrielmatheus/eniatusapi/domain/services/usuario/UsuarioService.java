@@ -37,6 +37,10 @@ public class UsuarioService {
       throw new BusinessException("Usuário não existe");
     }
 
+    String senha = passwordEncoder().encode(usuario.getSenha());
+    System.out.println(senha);
+    usuario.setSenha(senha);
+
     usuario.setId(id);
     return usuarioRepository.save(usuario);
   }
