@@ -1,6 +1,6 @@
 package com.gabrielmatheus.eniatusapi.domain.repositories;
 
-import java.util.List;
+import java.util.Optional;
 
 import com.gabrielmatheus.eniatusapi.domain.models.SalarioFamilia;
 
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SalarioFamiliaRepository extends JpaRepository<SalarioFamilia, Long> {
 
-  List<SalarioFamilia> findByVigencia(Integer vigencia);
+  Optional<SalarioFamilia> findByVigencia(Integer vigencia);
+
+  Optional<SalarioFamilia> findByAtivo(Boolean ativo);
 
 }

@@ -1,13 +1,13 @@
 package com.gabrielmatheus.eniatusapi.domain.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,26 +17,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "descontos")
 public class Descontos {
-  // inss, irrf, contribuicao sindical, faltas, outros_descontos, total_descontos
-
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  // se houver
+  @Column(columnDefinition = "decimal(10,2) default '0.00'")
   private BigDecimal contribuicaoSindical;
 
-  // se houver
+  @Column(columnDefinition = "integer default 0")
   private Integer faltas;
 
-  private BigDecimal totalDesconto;
-  
-  @OneToOne
-  private Inss inss;
-  
-  @OneToOne
-  private Irrf irrf;
-  
+  @Column(nullable = false)
+  private LocalDateTime dataDesconto;
+
 }

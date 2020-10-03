@@ -1,7 +1,9 @@
 package com.gabrielmatheus.eniatusapi.domain.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,15 +23,16 @@ public class Proventos {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  // obrigatorio
-  private BigDecimal salario;
-  // se houver
+  @Column(columnDefinition = "decimal(10,2) default '0.00'")
   private BigDecimal adicionalTempoServico;
-  // se houver
+  
+  @Column(columnDefinition = "integer default 0")
   private Integer horaExtra;
-  // se houver
+
+  @Column(columnDefinition = "decimal(10,2) default '0.00'")
   private BigDecimal auxAlimentacao;
 
-  private BigDecimal salarioBruto;
+  @Column(nullable = false)
+  private LocalDateTime dataProvento;
 
 }
