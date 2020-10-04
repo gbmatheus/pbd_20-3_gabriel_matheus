@@ -1,13 +1,15 @@
-package com.gabrielmatheus.eniatusapi.domain.models;
+package com.gabrielmatheus.eniatusapi.domain.models.descartar;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,23 +18,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Proventos {
+public class OutrosDescontos {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(columnDefinition = "decimal(10,2) default '0.00'")
-  private BigDecimal adicionalTempoServico;
-  
-  @Column(columnDefinition = "integer default 0")
-  private Integer horaExtra;
+  @NotBlank
+  private String descricao;
 
-  @Column(columnDefinition = "decimal(10,2) default '0.00'")
-  private BigDecimal auxAlimentacao;
+  @NotNull
+  private BigDecimal valor;
 
   @Column(nullable = false)
-  private LocalDateTime dataProvento;
+  private LocalDateTime dataDesconto;
 
 }
