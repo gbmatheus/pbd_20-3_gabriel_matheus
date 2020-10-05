@@ -6,10 +6,10 @@ import java.math.RoundingMode;
 /**
  * MathContext
  */
-public class MC {
+public class ContextoMatematico {
 
-  public static MathContext mc() {
-    return new MathContext(3, RoundingMode.HALF_UP);
+  public static MathContext arredondar() {
+    return new MathContext(3, RoundingMode.HALF_EVEN);
   }
   
 }
