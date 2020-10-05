@@ -1,9 +1,9 @@
-package com.gabrielmatheus.eniatusapi.domain.services;
+package com.gabrielmatheus.eniatusapi.domain.services.funcionario;
 
-import java.time.LocalDateTime;
 
 import com.gabrielmatheus.eniatusapi.domain.models.Pessoa;
 import com.gabrielmatheus.eniatusapi.domain.repositories.PessoaRepository;
+import com.gabrielmatheus.eniatusapi.domain.services.ServiceGeneric;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,12 +20,4 @@ public class PessoaService extends ServiceGeneric<Pessoa> {
     return pessoaRepository;
   }
 
-  @Override
-  public Pessoa save(Pessoa objeto) {
-    objeto.setDt_admissao(LocalDateTime.now());
-
-    return super.save(objeto);
-  }
-
-  
 }

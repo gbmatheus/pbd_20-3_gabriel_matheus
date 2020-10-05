@@ -36,7 +36,6 @@ public class OutrosAcrescimos {
   private LocalDateTime dataAcrecimo;
   
   @ManyToOne
-  private Proventos proventos;
+  private FolhaMensal folhaMensal;
 
-  
 }

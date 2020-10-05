@@ -35,6 +35,7 @@ public class OutrosDescontos {
   @Column(nullable = false)
   private LocalDateTime dataDesconto;
 
+  @Column(nullable = false)
   @ManyToOne
-  private Descontos descontos;
+  private FolhaMensal folhaMensal;
 }

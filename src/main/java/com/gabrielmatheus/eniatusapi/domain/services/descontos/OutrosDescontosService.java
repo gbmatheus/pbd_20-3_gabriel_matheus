@@ -1,9 +1,10 @@
-package com.gabrielmatheus.eniatusapi.domain.services;
+package com.gabrielmatheus.eniatusapi.domain.services.descontos;
 
 import java.time.LocalDateTime;
 
 import com.gabrielmatheus.eniatusapi.domain.models.OutrosDescontos;
 import com.gabrielmatheus.eniatusapi.domain.repositories.OutrosDescontosRepository;
+import com.gabrielmatheus.eniatusapi.domain.services.ServiceGeneric;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
