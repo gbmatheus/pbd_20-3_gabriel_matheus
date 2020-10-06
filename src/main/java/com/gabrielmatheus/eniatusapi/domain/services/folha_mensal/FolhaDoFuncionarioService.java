@@ -59,20 +59,24 @@ public class FolhaDoFuncionarioService {
     BigDecimal salario = ConverteSalario.converterParaBigDecimal(funcionario.getSalario());
 
     /**
-     * Valores configurados
+     * Buscando os valores configurados
      */
     Inss inss = impostoService.verificarInss(salario, hoje.getYear());
     Irrf irrf = impostoService.verificarIrrf(salario, hoje.getYear());
     SalarioMinimo salarioMinimo = salarioMinimoService.isActive();
     SalarioFamilia salarioFamilia = salarioFamiliaService.isActive();
 
+    /**
+     * System.out.println("Settando valores inss, irrf e salario"); 
+     */
     folhaMensal.setInss(inss);
     folhaMensal.setIrrf(irrf);
     folhaMensal.setSalarioMinimo(salarioMinimo);
     folhaMensal.setSalarioFamilia(salarioFamilia);
-
+    
     /**
      * Verificando e calculando adicional por tempo
+     System.out.println("Calculando e settando adicional por tempo");
      */
     folhaMensal.setAdicionalTempoServico(adicionalPorTempoService.calcularAddPorTempo(funcionario.getDt_admissao(),
         ConverteSalario.converterParaBigDecimal(funcionario.getSalario())));
@@ -86,9 +90,12 @@ public class FolhaDoFuncionarioService {
 
     /**
      * Setando funcionario
+     * Adicionadno funcionario na lista"
      */
     folhaMensal.getFuncionario().add(funcionario);
 
+
+    
     return folhaMensalRepository.save(folhaMensal);
   }
 
