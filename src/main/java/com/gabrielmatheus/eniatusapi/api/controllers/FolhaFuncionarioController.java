@@ -25,9 +25,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/folha-de-pagamento")
 public class FolhaFuncionarioController {
 
-  private FuncionarioRepository funcionarioRepository;
-  private FolhaMensalRepository folhaMensalRepository;
-  private FolhaDoFuncionarioService folhaDoFuncionarioService;
+  private final FuncionarioRepository funcionarioRepository;
+  private final FolhaMensalRepository folhaMensalRepository;
+  private final FolhaDoFuncionarioService folhaDoFuncionarioService;
+
+  public FolhaFuncionarioController(FuncionarioRepository funcionarioRepository,
+  FolhaMensalRepository folhaMensalRepository, FolhaDoFuncionarioService folhaDoFuncionarioService) {
+    this.funcionarioRepository = funcionarioRepository;
+    this.folhaMensalRepository = folhaMensalRepository;
+    this.folhaDoFuncionarioService = folhaDoFuncionarioService;
+  }
   
   @GetMapping("/funcionarios/{id}")
   public ResponseEntity<List<FolhaMensal>> indexFolhasFuncionario (@PathVariable Long id) {
@@ -41,18 +48,17 @@ public class FolhaFuncionarioController {
 
     return ResponseEntity.ok().body(folhasDoFuncionairo);
 
-  }
-  
-  @PostMapping("/funcionario/{id}")
+  }  
+
+  @PostMapping("/funcionarios/{id}")
   @ResponseStatus(HttpStatus.CREATED)
   public FolhaMensal create(@PathVariable Long id, @Valid @RequestBody FolhaMensal folhaMensal ) {
-    
+     
     FolhaMensal folha = folhaDoFuncionarioService.createFolha(id, folhaMensal);
     
     System.out.println(folha.toString());
     
     return folha;
   }
-
   
 }

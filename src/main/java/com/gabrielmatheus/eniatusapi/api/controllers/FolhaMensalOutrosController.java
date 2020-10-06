@@ -62,16 +62,11 @@ public class FolhaMensalOutrosController {
     return ResponseEntity.ok(folhaOutrosDescontos);
   }
 
-  @PostMapping("/{id}/outros-descontos/")
-  public ResponseEntity<OutrosDescontos> createOutrosDescontos(@PathVariable Long id,
-      @RequestBody OutrosDescontos outrosDescontos) {
-    OutrosDescontos oa = addOutrosDescontosServices.addDescontos(id, outrosDescontos);
-
-    if (oa == null) {
-      return ResponseEntity.badRequest().build();
-    }
-
-    return ResponseEntity.ok().body(oa);
+  @PostMapping("/{id}/outros-descontos")
+  @ResponseStatus(HttpStatus.CREATED)
+  public OutrosDescontos createOutrosDescontos(@PathVariable Long id,
+      @Valid @RequestBody OutrosDescontos outrosDescontos) {
+    return addOutrosDescontosServices.addDescontos(id, outrosDescontos);
   }
 
   /**
