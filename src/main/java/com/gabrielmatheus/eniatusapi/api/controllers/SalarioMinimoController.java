@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.gabrielmatheus.eniatusapi.domain.models.SalarioMinimo;
-import com.gabrielmatheus.eniatusapi.domain.services.SalarioMinimoService;
+import com.gabrielmatheus.eniatusapi.domain.services.salarios.SalarioMinimoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,9 +41,9 @@ public class SalarioMinimoController {
     return salarioMinimo;
   }
 
-  @GetMapping("/{salarioID}")
-  public ResponseEntity<SalarioMinimo> show(@PathVariable Long salarioID) {
-    Optional<SalarioMinimo> salarioMinimo = salarioMinimoService.findById(salarioID);
+  @GetMapping("/{id}")
+  public ResponseEntity<SalarioMinimo> show(@PathVariable Long id) {
+    Optional<SalarioMinimo> salarioMinimo = salarioMinimoService.findById(id);
 
     if(!salarioMinimo.isPresent()){
       return ResponseEntity.notFound().build();
@@ -52,11 +52,11 @@ public class SalarioMinimoController {
     return ResponseEntity.ok(salarioMinimo.get());
   }
 
-  @PutMapping("/{salarioID}")
+  @PutMapping("/{id}")
   public ResponseEntity<SalarioMinimo> update (@Valid @RequestBody SalarioMinimo sm,
-    @PathVariable Long salarioID) {
+    @PathVariable Long id) {
     
-    SalarioMinimo salarioMinimo = salarioMinimoService.update(sm, salarioID);
+    SalarioMinimo salarioMinimo = salarioMinimoService.update(sm, id);
     
     if(salarioMinimo == null){
       return ResponseEntity.notFound().build();
@@ -65,9 +65,9 @@ public class SalarioMinimoController {
     return ResponseEntity.ok(salarioMinimo);
   }
 
-  @DeleteMapping("/{salarioID}")
-  public ResponseEntity<Void> delete (@PathVariable Long salarioID) {
-    if(!salarioMinimoService.delete(salarioID)) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete (@PathVariable Long id) {
+    if(!salarioMinimoService.delete(id)) {
       return ResponseEntity.notFound().build();
     }
 

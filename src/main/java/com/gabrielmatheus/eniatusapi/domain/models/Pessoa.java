@@ -42,6 +42,4 @@ public class Pessoa {
   @Size(max = 40)
   private String naturalidade;
 
-  private LocalDateTime dt_admissao;
-
 }

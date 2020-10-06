@@ -7,7 +7,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.gabrielmatheus.eniatusapi.domain.models.Inss;
-import com.gabrielmatheus.eniatusapi.domain.services.InssService;
+import com.gabrielmatheus.eniatusapi.domain.services.imposto.InssService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/inss")
 public class InssController {
 
-
   @Autowired
   private InssService inssService;
 
@@ -41,10 +40,10 @@ public class InssController {
     return inssService.save(i);
   }
 
-  @GetMapping("/{inssID}")
-  public ResponseEntity<Inss> show(@PathVariable Long inssID) {
+  @GetMapping("/{id}")
+  public ResponseEntity<Inss> show(@PathVariable Long id) {
    
-    Optional<Inss> inss = inssService.findById(inssID);
+    Optional<Inss> inss = inssService.findById(id);
 
     if(!inss.isPresent()) {
       return ResponseEntity.notFound().build();
@@ -53,10 +52,10 @@ public class InssController {
     return ResponseEntity.ok(inss.get());
   }
 
-  @PutMapping("/{inssID}")
-  public ResponseEntity<Inss> update (@PathVariable Long inssID, @RequestBody Inss i) {
+  @PutMapping("/{id}")
+  public ResponseEntity<Inss> update (@PathVariable Long id, @RequestBody Inss i) {
     
-    Inss inss = inssService.update(i, inssID);
+    Inss inss = inssService.update(i, id);
 
     if(inss == null) {
       return ResponseEntity.notFound().build();
@@ -65,10 +64,10 @@ public class InssController {
     return ResponseEntity.ok(inss);
   }
 
-  @DeleteMapping("/{inssID}")
-  public ResponseEntity<Void> delete (@PathVariable Long inssID) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete (@PathVariable Long id) {
     
-    if(!inssService.delete(inssID)) {
+    if(!inssService.delete(id)) {
       return ResponseEntity.notFound().build();
     }
    

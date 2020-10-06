@@ -3,12 +3,13 @@ package com.gabrielmatheus.eniatusapi.domain.models;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,7 +21,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "outros_acrescimos")
 public class OutrosAcrescimos {
 
   @Id
@@ -33,10 +33,11 @@ public class OutrosAcrescimos {
   @NotNull
   private BigDecimal valor;
   
+  @Column(nullable = false)
   private LocalDateTime dataAcrecimo;
   
   @ManyToOne
-  private Proventos proventos;
+  @JoinColumn(name="folha_mensal_id")
+  private FolhaMensal folhaMensal;
 
-  
 }

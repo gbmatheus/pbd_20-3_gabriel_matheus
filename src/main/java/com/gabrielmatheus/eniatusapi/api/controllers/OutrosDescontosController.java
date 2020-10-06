@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.gabrielmatheus.eniatusapi.domain.models.OutrosDescontos;
-import com.gabrielmatheus.eniatusapi.domain.services.OutrosDescontosService;
+import com.gabrielmatheus.eniatusapi.domain.services.descontos.OutrosDescontosService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,10 +39,10 @@ public class OutrosDescontosController {
     return outrosDescontosService.save(od);
   }
 
-  @GetMapping("/{outrosDescontosID}")
-  public ResponseEntity<OutrosDescontos> show(@PathVariable Long outrosDescontosID) {
+  @GetMapping("/{id}")
+  public ResponseEntity<OutrosDescontos> show(@PathVariable Long id) {
    
-    Optional<OutrosDescontos> outrosDescontos = outrosDescontosService.findById(outrosDescontosID);
+    Optional<OutrosDescontos> outrosDescontos = outrosDescontosService.findById(id);
 
     if(!outrosDescontos.isPresent()) {
       return ResponseEntity.notFound().build();
@@ -51,10 +51,10 @@ public class OutrosDescontosController {
     return ResponseEntity.ok(outrosDescontos.get());
   }
 
-  @PutMapping("/{outrosDescontosID}")
-  public ResponseEntity<OutrosDescontos> update (@PathVariable Long outrosDescontosID, @RequestBody OutrosDescontos od) {
+  @PutMapping("/{id}")
+  public ResponseEntity<OutrosDescontos> update (@PathVariable Long id, @RequestBody OutrosDescontos od) {
     
-    OutrosDescontos outrosDescontos = outrosDescontosService.update(od, outrosDescontosID);
+    OutrosDescontos outrosDescontos = outrosDescontosService.update(od, id);
 
     if(outrosDescontos == null) {
       return ResponseEntity.notFound().build();
@@ -63,10 +63,10 @@ public class OutrosDescontosController {
     return ResponseEntity.ok(outrosDescontos);
   }
 
-  @DeleteMapping("/{outrosDescontosID}")
-  public ResponseEntity<Void> delete (@PathVariable Long outrosDescontosID) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete (@PathVariable Long id) {
     
-    if(!outrosDescontosService.delete(outrosDescontosID)) {
+    if(!outrosDescontosService.delete(id)) {
       return ResponseEntity.notFound().build();
     }
    
