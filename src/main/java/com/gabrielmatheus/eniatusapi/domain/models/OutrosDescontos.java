@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,7 +36,7 @@ public class OutrosDescontos {
   @Column(nullable = false)
   private LocalDateTime dataDesconto;
 
-  @Column(nullable = false)
   @ManyToOne
+  @JoinColumn(name="folha_mensal_id")
   private FolhaMensal folhaMensal;
 }

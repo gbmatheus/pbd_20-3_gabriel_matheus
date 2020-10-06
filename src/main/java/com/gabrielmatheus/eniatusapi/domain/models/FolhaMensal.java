@@ -2,6 +2,7 @@ package com.gabrielmatheus.eniatusapi.domain.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -64,6 +65,6 @@ public class FolhaMensal {
   private SalarioFamilia salarioFamilia;
 
   @ManyToMany(fetch = FetchType.EAGER)
-  private List<Funcionario> funcionario;
+  private List<Funcionario> funcionario = new ArrayList<>();
 
 }
