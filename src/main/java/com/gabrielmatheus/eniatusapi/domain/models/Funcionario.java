@@ -2,6 +2,7 @@ package com.gabrielmatheus.eniatusapi.domain.models;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -49,7 +50,7 @@ public class Funcionario {
   private Pessoa pessoa;
   
   @NotNull
-  @OneToOne
+  @OneToOne(cascade = CascadeType.DETACH)
   private Salario salario;
 
   private Boolean ativo = true;

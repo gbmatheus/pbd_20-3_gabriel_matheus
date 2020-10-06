@@ -65,6 +65,7 @@ public class CadastroFuncionarioService {
     funcionario.setPessoa(pessoa);
     funcionario.setSalario(salario);
     funcionario.setCod_funcionario(pessoa.getCpf());
+    funcionario.setDt_admissao(LocalDateTime.now());
 
     return funcionarioRepository.save(funcionario);
   }
@@ -106,12 +107,14 @@ public class CadastroFuncionarioService {
         throw new BusinessException("Salário minimo não existe");
       }
 
+      salario.setHorasContratadas(horas);
       salario.setQuantSemanas(quantSemanas);
       salario.setValorDaHora(converterSalario(salarioMinimoAnterior.get().getValor(), quantSemanas, horas));
 
       return salarioRepository.save(salario);
     }
 
+    salario.setHorasContratadas(horas);
     salario.setQuantSemanas(quantSemanas);
     salario
         .setValorDaHora(converterSalario(salarioMinimo.get().getValor(), quantSemanas, salario.getHorasContratadas()));
