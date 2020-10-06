@@ -37,6 +37,6 @@ public class SalarioMinimo {
   private LocalDateTime periodo;
 
   @Column(nullable = false)
-  private Boolean ativo = true;
+  private Boolean ativo;
 
 }

@@ -7,6 +7,7 @@ import com.gabrielmatheus.eniatusapi.domain.exceptions.BusinessException;
 import com.gabrielmatheus.eniatusapi.domain.models.SalarioFamilia;
 import com.gabrielmatheus.eniatusapi.domain.repositories.SalarioFamiliaRepository;
 import com.gabrielmatheus.eniatusapi.domain.services.ServiceGeneric;
+import com.gabrielmatheus.eniatusapi.domain.utils.VerificarVigencia;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,16 +32,15 @@ public class SalarioFamiliaService extends ServiceGeneric<SalarioFamilia> {
     salarioFamilia.setVigencia(salarioFamilia.getVigencia() == null ? LocalDateTime.now().getYear() : salarioFamilia.getVigencia());
     salarioFamilia.setMes(salarioFamilia.getMes() == null ? LocalDateTime.now().getMonthValue() : salarioFamilia.getMes());
     salarioFamilia.setPeriodo(LocalDateTime.now());
+    salarioFamilia.setAtivo(true);
+    
+    if (salarioFamiliaAtual.isPresent()) {
+      Boolean eAtual = VerificarVigencia.atual(salarioFamilia.getMes(), salarioFamilia.getVigencia(),
+          salarioFamiliaAtual.get().getMes(), salarioFamiliaAtual.get().getVigencia());
 
-    // Ser for de meses anteriores
-    if(salarioFamiliaAtual.isPresent() 
-      && salarioFamiliaAtual.get().getVigencia() <= salarioFamilia.getVigencia() 
-      && salarioFamiliaAtual.get().getMes() <= salarioFamilia.getMes()
-    ) {
-      salarioFamiliaAtual.get().setAtivo(false);
+      salarioFamilia.setAtivo(eAtual);
+      salarioFamiliaAtual.get().setAtivo(!eAtual);
       getRepository().save(salarioFamiliaAtual.get());
-    } else {
-      salarioFamilia.setAtivo(true);
     }
   
     return getRepository().save(salarioFamilia);
