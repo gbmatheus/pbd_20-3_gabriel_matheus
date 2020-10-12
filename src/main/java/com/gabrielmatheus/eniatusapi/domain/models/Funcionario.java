@@ -1,5 +1,8 @@
 package com.gabrielmatheus.eniatusapi.domain.models;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,19 +35,24 @@ public class Funcionario {
   @Size(min = 11,  max = 14)
   private String cod_funcionario;
   
-  // se tiver
+  @Column(columnDefinition = "integer default 0")
   private Integer quantidade_filhos;
 
   @Enumerated(EnumType.STRING)
   @Column(length = 5)
   private TipoContratacao tipo;
-
+  
+  @Column(nullable = false)
+  private LocalDateTime dt_admissao;
+  
   @NotNull
   @OneToOne
   private Pessoa pessoa;
   
   @NotNull
-  @OneToOne
+  @OneToOne(cascade = CascadeType.DETACH)
   private Salario salario;
+
+  private Boolean ativo = true;
   
 }

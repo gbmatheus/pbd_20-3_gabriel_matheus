@@ -31,6 +31,7 @@ public class Salario {
   @Column(scale = 2)
   private BigDecimal valorDaHora;
   
+  @Column(columnDefinition = "decimal(10,1) default '5.5'")
   private BigDecimal quantSemanas;
 
   // @ManyToOne

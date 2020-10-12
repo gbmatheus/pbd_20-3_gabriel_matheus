@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface SalarioMinimoRepository extends JpaRepository<SalarioMinimo, Long>{
   
   Optional<SalarioMinimo> findByVigencia(Integer vigencia);
+  
+  Optional<SalarioMinimo> findByAtivo(Boolean ativo);
 
 }

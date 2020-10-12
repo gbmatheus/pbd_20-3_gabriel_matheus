@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.gabrielmatheus.eniatusapi.domain.models.Irrf;
-import com.gabrielmatheus.eniatusapi.domain.services.IrrfService;
+import com.gabrielmatheus.eniatusapi.domain.services.imposto.IrrfService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,10 +39,10 @@ public class IrrfController {
     return irrfService.save(i);
   }
 
-  @GetMapping("/{irrfID}")
-  public ResponseEntity<Irrf> show(@PathVariable Long irrfID) {
+  @GetMapping("/{id}")
+  public ResponseEntity<Irrf> show(@PathVariable Long id) {
    
-    Optional<Irrf> irrf = irrfService.findById(irrfID);
+    Optional<Irrf> irrf = irrfService.findById(id);
 
     if(!irrf.isPresent()) {
       return ResponseEntity.notFound().build();
@@ -51,10 +51,10 @@ public class IrrfController {
     return ResponseEntity.ok(irrf.get());
   }
 
-  @PutMapping("/{irrfID}")
-  public ResponseEntity<Irrf> update (@PathVariable Long irrfID, @RequestBody Irrf i) {
+  @PutMapping("/{id}")
+  public ResponseEntity<Irrf> update (@PathVariable Long id, @RequestBody Irrf i) {
     
-    Irrf irrf = irrfService.update(i, irrfID);
+    Irrf irrf = irrfService.update(i, id);
 
     if(irrf == null) {
       return ResponseEntity.notFound().build();
@@ -63,10 +63,10 @@ public class IrrfController {
     return ResponseEntity.ok(irrf);
   }
 
-  @DeleteMapping("/{irrfID}")
-  public ResponseEntity<Void> delete (@PathVariable Long irrfID) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete (@PathVariable Long id) {
     
-    if(!irrfService.delete(irrfID)) {
+    if(!irrfService.delete(id)) {
       return ResponseEntity.notFound().build();
     }
    
