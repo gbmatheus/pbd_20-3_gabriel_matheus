@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.gabrielmatheus.eniatusapi.domain.models.usuario.Usuario;
 import com.gabrielmatheus.eniatusapi.domain.repositories.usuario.UsuarioRepository;
-import com.gabrielmatheus.eniatusapi.domain.utils.Crypt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,8 +23,6 @@ public class UsuarioLoginServices implements UserDetailsService {
   public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
     
     Optional<Usuario> usuario = usuarioRepository.findByLogin(login);
-
-    System.out.println("senha do banco " + new Crypt().encode(usuario.get().getSenha()));
 
     if (!usuario.isPresent()) {
       throw new UsernameNotFoundException("Usuário não existe");

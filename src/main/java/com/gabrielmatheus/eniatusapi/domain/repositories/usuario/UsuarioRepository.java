@@ -2,6 +2,7 @@ package com.gabrielmatheus.eniatusapi.domain.repositories.usuario;
 
 import java.util.Optional;
 
+import com.gabrielmatheus.eniatusapi.domain.models.Pessoa;
 import com.gabrielmatheus.eniatusapi.domain.models.usuario.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
   Optional<Usuario> findByLoginOrEmail (String login, String email);
 
   Optional<Usuario> findByEmail (String email);
+
+  Optional<Usuario> findByPessoa(Pessoa pessoa);
   
 }

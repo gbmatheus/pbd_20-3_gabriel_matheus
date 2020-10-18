@@ -4,7 +4,6 @@ import com.gabrielmatheus.eniatusapi.api.dto.SenhaDto;
 import com.gabrielmatheus.eniatusapi.domain.exceptions.BusinessException;
 import com.gabrielmatheus.eniatusapi.domain.models.usuario.Usuario;
 import com.gabrielmatheus.eniatusapi.domain.repositories.usuario.UsuarioRepository;
-import com.gabrielmatheus.eniatusapi.domain.utils.Crypt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
