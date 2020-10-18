@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.gabrielmatheus.eniatusapi.domain.models.Irrf;
 import com.gabrielmatheus.eniatusapi.domain.repositories.IrrfRepository;
 import com.gabrielmatheus.eniatusapi.domain.services.ServiceGeneric;
+import com.gabrielmatheus.eniatusapi.domain.utils.VerificarVigencia;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,30 +25,23 @@ public class IrrfService extends ServiceGeneric<Irrf> {
 
   @Override
   public Irrf save(Irrf irrf) {
-    Optional<Irrf> irrfAtual = irrfRepository.findByAliquota(irrf.getAliquota());
-
+    Optional<Irrf> irrfAtual = irrfRepository.findByAliquotaAndAtivo(irrf.getAliquota(), true);
+    
     irrf.setVigencia(irrf.getVigencia() == null ? LocalDateTime.now().getYear() : irrf.getVigencia());
     irrf.setMes(irrf.getMes() == null ? LocalDateTime.now().getMonthValue() : irrf.getMes());
-    
-    // if (irrf.getMes() == null) {
-    //   irrf.setMes(LocalDateTime.now().getMonthValue());
-    // }
-    // if (irrf.getVigencia() == null) {
-    //   irrf.setVigencia(LocalDateTime.now().getYear());
-    // }
+    irrf.setPeriodo(LocalDateTime.now());
+    irrf.setAtivo(true);
     
     // Ser for de meses anteriores
-    if(irrfAtual.isPresent() 
-      && irrfAtual.get().getVigencia() <= irrf.getVigencia() 
-      && irrfAtual.get().getMes() <= irrf.getMes()
-    ) {
-      irrfAtual.get().setAtivo(false);
+    if(irrfAtual.isPresent()) {
+      Boolean irrfNovoEAtual = VerificarVigencia.atual(irrf.getMes(), irrf.getVigencia(), irrfAtual.get().getMes(), irrfAtual.get().getVigencia());
+
+      irrf.setAtivo(irrfNovoEAtual);
+      irrfAtual.get().setAtivo(!irrfNovoEAtual);
       getRepository().save(irrfAtual.get());
-    } else {
-      irrf.setAtivo(true);
+      
     }
     
-    irrf.setPeriodo(LocalDateTime.now());
 
     return getRepository().save(irrf);
 

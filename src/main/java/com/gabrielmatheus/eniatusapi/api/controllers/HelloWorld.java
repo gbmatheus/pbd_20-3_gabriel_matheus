@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 // import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,7 +57,7 @@ public class HelloWorld {
   //   return service.save(usuario);
   // }
 
-  @PostMapping("/user/{id}/alterar-senha")
+  @PostMapping("/conta/{id}/alterar-senha")
   public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody SenhaDto senhaDto) {
       System.out.println(senhaDto.getSenha());
       System.out.println(senhaDto.getNovaSenha());

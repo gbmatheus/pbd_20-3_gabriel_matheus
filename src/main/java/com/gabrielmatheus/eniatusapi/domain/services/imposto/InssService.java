@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.gabrielmatheus.eniatusapi.domain.models.Inss;
 import com.gabrielmatheus.eniatusapi.domain.repositories.InssRepository;
 import com.gabrielmatheus.eniatusapi.domain.services.ServiceGeneric;
+import com.gabrielmatheus.eniatusapi.domain.utils.VerificarVigencia;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,23 +26,23 @@ public class InssService extends ServiceGeneric<Inss> {
   @Override
   public Inss save(Inss inss) {
 
-    Optional<Inss> inssAtual = inssRepository.findByAliquota(inss.getAliquota());
+    Optional<Inss> inssAtual = inssRepository.findByAliquotaAndAtivo(inss.getAliquota(), true);
 
     inss.setVigencia(inss.getVigencia() == null ? LocalDateTime.now().getYear() : inss.getVigencia());
     inss.setMes(inss.getMes() == null ? LocalDateTime.now().getMonthValue() : inss.getMes());
-    
-    // Ser for de meses anteriores
-    if(inssAtual.isPresent() 
-      && inssAtual.get().getVigencia() <= inss.getVigencia() 
-      && inssAtual.get().getMes() <= inss.getMes()
-    ) {
-      inssAtual.get().setAtivo(false);
-      getRepository().save(inssAtual.get());
-    } else {
-      inss.setAtivo(true);
-    }
-    
     inss.setPeriodo(LocalDateTime.now());
+    inss.setAtivo(true);
+
+    // Ser for de meses anteriores
+    if (inssAtual.isPresent()) {
+      Boolean inssNovoEAtual = VerificarVigencia.atual(inss.getMes(), inss.getVigencia(), inssAtual.get().getMes(),
+          inssAtual.get().getVigencia());
+
+      inss.setAtivo(inssNovoEAtual);
+      inssAtual.get().setAtivo(!inssNovoEAtual);
+      getRepository().save(inssAtual.get());
+
+    }
 
     return getRepository().save(inss);
 
@@ -49,7 +50,7 @@ public class InssService extends ServiceGeneric<Inss> {
 
   @Override
   public Inss update(Inss inss, Long id) {
-    if(!getRepository().existsById(id)) {
+    if (!getRepository().existsById(id)) {
       return null;
     }
 

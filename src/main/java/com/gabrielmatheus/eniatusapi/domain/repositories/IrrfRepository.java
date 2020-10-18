@@ -18,4 +18,6 @@ public interface IrrfRepository extends JpaRepository<Irrf, Long>{
 
   List<Irrf> findByAtivo(Boolean ativo);
 
+  Optional<Irrf> findByAliquotaAndAtivo(BigDecimal aliquota, Boolean ativo);
+
 }
