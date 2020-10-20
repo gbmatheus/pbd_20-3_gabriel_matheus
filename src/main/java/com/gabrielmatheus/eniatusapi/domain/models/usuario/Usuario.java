@@ -1,5 +1,6 @@
 package com.gabrielmatheus.eniatusapi.domain.models.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,12 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.gabrielmatheus.eniatusapi.domain.models.Pessoa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,8 +47,11 @@ public class Usuario {
   @Size(min = 6)
   private String senha;
 
+  @OneToOne
+  private Pessoa pessoa;
+
   @ManyToMany(fetch = FetchType.EAGER)
-  private List<Permissao> permissoes;
+  private List<Permissao> permissoes = new ArrayList<>();
 
   public Usuario (Usuario usuario) {
     // super();

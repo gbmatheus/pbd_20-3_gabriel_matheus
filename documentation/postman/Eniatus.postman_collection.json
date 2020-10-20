@@ -1,0 +1,1325 @@
+{
+	"info": {
+		"_postman_id": "4353b77c-b54c-4a7c-9eef-87807272f7cd",
+		"name": "Eniatus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/usuarios",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"chico123\",\n    \"senha\": \"chico123\",\n    \"email\": \"chico@mail.com\",\n    \"pessoa\": {\n        \"nome\": \"Chico Cardoso\",\n        \"cpf\": \"111.111.111-11\",\n        \"dt_nascimento\": \"1987-08-04T00:00:00\",\n        \"naturalidade\": \"Rio Verde - MT\"\n    },\n    \"permissoes\": [\n            {\n                \"nome\": \"CONTADOR\"\n            }\n        ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/usuarios",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/usuarios/2",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Vale Transporte\",\n    \"valor\": 80.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos/5",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update senha",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ana123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ana123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"senha\": \"ana123\",\n    \"novaSenha\": \"ana123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/user/2/alterar-senha",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"user",
+								"2",
+								"alterar-senha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/login",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Funcionario",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "chico321",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "chico123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/funcionarios/",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"funcionarios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n  \n  {\n    \"quantidade_filhos\": 4,\n    \"tipo\": \"MES\",\n    \"pessoa\": {\n        \"nome\": \"Melissa Catarina Larissa Cardoso\",\n        \"cpf\": \"598.407.058-81\",\n        \"dt_nascimento\": \"1987-08-04T00:00:00\",\n        \"naturalidade\": \"Lucas do Rio Verde - MT\"\n    },\n  \"salario\": {\n        \"horasContratadas\": 40,\n        \"valorDaHora\": 9.00\n    }\n}\n\n\n  {\n    \"quantidade_filhos\": 1,\n    \"tipo\": \"HORA\",\n    \"pessoa\": {\n        \"nome\": \"Bruno Pietro Melo\",\n        \"cpf\": \"435.347.524-06\",\n        \"dt_nascimento\": \"1987-10-12T22:39:21\",\n        \"naturalidade\": \"Serra - ES\"\n    },\n    \"salario\": {\n        \"horasContratadas\": 30,\n        \"valorDaHora\": 6.00\n    }\n}\n\n{\n    \"quantidade_filhos\": 0,\n    \"tipo\": \"MES\",\n    \"pessoa\": {\n        \"nome\": \"Mateus Thiago Teixeira\",\n        \"cpf\": \"144.252.583-55\",\n        \"dt_nascimento\": \"1987-03-24T00:00:00\",\n        \"naturalidade\": \"Brasília - DF\"\n    },\n    \"salario\": {\n        \"horasContratadas\": 450,\n        \"valorDaHora\": 9.00\n    }\n}\n\n{\n    \"quantidade_filhos\": 2,\n    \"tipo\": \"MES\",\n    \"pessoa\": {\n        \"nome\": \"joa1ow\",\n        \"cpf\": \"12345678902\",\n        \"dt_nascimento\": \"2020-10-20T00:00:00\",\n        \"naturalidade\": \"pe\"\n    },\n    \"salario\": {\n        \"horasContratadas\": 40,\n        \"valorDaHora\": 9.00,\n        \"quantSemanas\": 4.50\n    }\n}\n\n{\n    \"quantidade_filhos\": 3,\n    \"tipo\": \"MES\",\n    \"pessoa\": {\n        \"nome\": \"Hugo Kevin Edson Freitas\",\n        \"cpf\": \"565.610.640-38\",\n        \"dt_nascimento\": \"1987-08-20T22:31:45\",\n        \"naturalidade\": \"Nova Iguaçu - RJ\"\n    },\n    \"salario\": {\n        \"horasContratadas\": 400,\n        \"valorDaHora\": 9.00,\n        \"quantSemanas\": 4.50\n    }\n}\n\n{\n    \"quantidade_filhos\": 0,\n    \"tipo\": \"HORA\",\n    \"pessoa\": {\n        \"nome\": \"Nicole Larissa Ferreira\",\n        \"cpf\": \"106.854.952-13\",\n        \"dt_nascimento\": \"1987-12-08T22:41:15\",\n        \"naturalidade\": \"Rio Branco - AC\"\n    },\n    \"salario\": {\n        \"horasContratadas\": 30,\n        \"valorDaHora\": 15.00\n    }\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/funcionarios",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/funcionarios/1",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"funcionarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cod_funcionario\": 5,\n    \"tipo\": \"Horista\",\n    \"quantidade_filhos\": 1\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/funcionarios/2",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"funcionarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/funcionarios/2",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"funcionarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Salario Familia",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/salario-familia",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-familia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"vigencia\": 2020, \"remuneracao\": 1425.56, \"valorUnitario\": 46.54 }\n\n{\"mes\": 1, \"vigencia\": 2017, \"remuneracao\": 859.88, \"valorUnitario\": 44.09}\n{\"mes\": 1, \"vigencia\": 2018, \"remuneracao\": 877.67,\t\"valorUnitario\": 45.00}\n{\"mes\": 1, \"vigencia\": 2019, \"remuneracao\": 907.77,\t\"valorUnitario\": 46.54}\n{\"mes\": 11, \"vigencia\": 2019, \"remuneracao\": 1364.43, \"valorUnitario\": 46.54}\n{\"mes\": 1, \"vigencia\": 2020, \"remuneracao\": 1425.56,\"valorUnitario\": 48.62}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/salario-familia",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-familia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/salario-familia/1",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-familia",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"vigencia\": 2019,\n        \"remuneracao\": 1364.43,\n        \"valorUnitario\": 46.54\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/salario-familia/1",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-familia",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/salario-familia/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-familia",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Salario Minimo",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/salario-minimo",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-minimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"vigencia\": 2020,\"valor\": 1045.00}\n\n{\"mes\": 1, \"vigencia\": 2020,\t\"valor\": 1039.00}\n{\"mes\": 2, \"vigencia\": 2020,\t\"valor\": 1045.00}\n{\"mes\": 1, \"vigencia\": 2019,\t\"valor\": 998.00}\n{\"mes\": 1, \"vigencia\": 2018,\t\"valor\": 954.00}\n{\"mes\": 1, \"vigencia\": 2017,\t\"valor\": 937.00}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/salario-minimo/",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-minimo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/salario-minimo/1",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-minimo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vigencia\":2020,\n    \"valor\": 1045.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/salario-minimo/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-minimo",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/salario-minimo/2",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"salario-minimo",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Outros Acrescimos",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/outros-acrescimos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-acrescimos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Caneta azul\",\n    \"valor\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/outros-acrescimos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-acrescimos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/outros-acrescimos/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-acrescimos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Vale Transporte\",\n    \"valor\": 80.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/outros-acrescimos/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-acrescimos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/outros-acrescimos/1",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-acrescimos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Irrf",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/irrf",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"irrf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"vigencia\": 2015, \"baseCalculoMin\": 0, \"baseCalculoMax\": 1787.77, \"aliquota\": 0.0, \"valorDeduzir\": 0 }\n\n{\"vigencia\": 2020, \"baseCalculoMin\": 3751.06, \"baseCalculoMax\": 4664.68, \"aliquota\": 22.50, \"valorDeduzir\": 636.13 }\n{\"vigencia\": 2020, \"baseCalculoMin\": 4664.68, \"baseCalculoMax\": 0.0, \"aliquota\": 27.50, \"valorDeduzir\": 869.36}\n{\"vigencia\": 2020, \"baseCalculoMin\": 1903.99, \"baseCalculoMax\": 2826.65, \"aliquota\": 7.5, \"valorDeduzir\": 142.80 }\n{\"vigencia\": 2020, \"baseCalculoMin\": 2826.66, \"baseCalculoMax\": 3751.05, \"aliquota\": 15.00, \"valorDeduzir\": 354.80 }\n{\"vigencia\": 2020, \"baseCalculoMin\": 0, \"baseCalculoMax\": 1903.98, \"aliquota\": 0.0, \"valorDeduzir\": 0 }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/irrf",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"irrf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/irrf/4",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"irrf",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vigencia\": 2020,\n    \"baseCalculo\": 3751.96,\n    \"aliqota\": 22.5,\n    \"valorDeduzir\": 636.13\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/irrf/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"irrf",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/irrf/4",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"irrf",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Inss",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/inss",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"inss"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mes\": 1, \"vigencia\": 2020, \"valorMin\":0, \"valorMax\": 1830.29,\t\"aliquota\": 8.00}\n{\"mes\": 1, \"vigencia\": 2020, \"valorMin\":1830.30, \"valorMax\": 3050.52,\t\"aliquota\": 9.00}\n{\"mes\": 1, \"vigencia\": 2020, \"valorMin\":3050.53, \"valorMax\": 6101.06,\t\"aliquota\": 11.00}\n\n\n{\"vigencia\": 2020, \"valorMin\":0, \"valorMax\": 1045.00,\t\"aliquota\": 7.50}\n{\"vigencia\": 2020, \"valorMin\":1045.01, \"valorMax\": 2089.60,\t\"aliquota\": 9.00}\n{\"vigencia\": 2020, \"valorMin\":2089.61, \"valorMax\": 3134.40,\t\"aliquota\": 12.00}\n{\"vigencia\": 2020, \"valorMin\":3134.41, \"valorMax\": 6101.06,\t\"aliquota\": 14.00}\n\t",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/inss",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"inss"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/inss/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"inss",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vigencia\":2020,\n    \"aliquota\":12,\n    \"valorMin\":2089.61,\n    \"valorMax\":3134.40\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/inss/2",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"inss",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/inss/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"inss",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Outros Descontos",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Vale Transporte\",\n    \"valor\": 57.90\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos/4",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Vale Transporte\",\n    \"valor\": 80.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos/5",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Proventos",
+			"item": [
+				{
+					"name": "Index Acrescimo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"descricao\": \"Caneta azul\",\"valor\": 10}\n{\"descricao\": \"Danos causados pelo empregado\",\"valor\": 50}\n{\"descricao\": \"Refeitorio\",\"valor\": 80}\n\n\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/folha-de-pagamento/3/outros-acrescimos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"folha-de-pagamento",
+								"3",
+								"outros-acrescimos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Acrescimo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"descricao\": \"Plano dentario\",\"valor\": 50}\n{\"descricao\": \"Academia\",\"valor\": 50}\n{\"descricao\": \"Plano de saúde\",\"valor\": 120}\n{\"descricao\": \"Vale Transporte\",\"valor\": 100}\n\n\n\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/folha-de-pagamento/3/outros-acrescimos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"folha-de-pagamento",
+								"3",
+								"outros-acrescimos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Desconto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"descricao\": \"Refeitorio\",\"valor\": 80}\n{\"descricao\": \"Danos causados pelo empregado\",\"valor\": 50}\n{\"descricao\": \"Caneta azul\",\"valor\": 10}\n\n\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/folha-de-pagamento/3/outros-descontos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"folha-de-pagamento",
+								"3",
+								"outros-descontos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index Desconto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"descricao\": \"Caneta azul\",\"valor\": 10}\n{\"descricao\": \"Danos causados pelo empregado\",\"valor\": 50}\n{\"descricao\": \"Refeitorio\",\"valor\": 80}\n\n\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/folha-de-pagamento/3/outros-descontos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"folha-de-pagamento",
+								"3",
+								"outros-descontos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Folha",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/folha-de-pagamento/",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"folha-de-pagamento",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"horaExtra\": 0,\n    \"auxAlimentacao\": 100.00,\n    \"contribuicaoSindical\": 0.00,\n    \"faltas\": 0\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/folha-de-pagamento/funcionarios/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"folha-de-pagamento",
+								"funcionarios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/proventos/2",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"proventos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Vale Transporte\",\n    \"valor\": 80.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos/3",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_80}}/outros-descontos/5",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"outros-descontos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Acrescimo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"horaExtra\": 10,\n    \"adicionalTempoServico\": \"58.00\",\n    \"auxAlimentacao\": \"120.00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_80}}/proventos/1/acrecimos",
+							"host": [
+								"{{base_url_80}}"
+							],
+							"path": [
+								"proventos",
+								"1",
+								"acrecimos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

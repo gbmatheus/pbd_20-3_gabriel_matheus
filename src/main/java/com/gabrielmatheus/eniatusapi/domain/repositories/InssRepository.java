@@ -17,5 +17,7 @@ public interface InssRepository extends JpaRepository<Inss, Long> {
   List<Inss> findByVigencia(Integer vigencia);
   
   List<Inss> findByAtivo(Boolean ativo);
+
+  Optional<Inss> findByAliquotaAndAtivo(BigDecimal aliquota, Boolean ativo);
   
 }

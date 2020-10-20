@@ -4,6 +4,7 @@ import com.gabrielmatheus.eniatusapi.domain.services.usuario.UsuarioLoginService
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,14 +32,16 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter{
   @Override
   public void configure(HttpSecurity http) throws Exception {
     http
-      // .csrf().disable()
-      .authorizeRequests()
-        .anyRequest().authenticated()
-        .antMatchers("/api/usuarios/**").hasAuthority("ADMIN") // Só admin pode acessar
-        .and()
-        .httpBasic()
-        .and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    .authorizeRequests()
+    .antMatchers("/api/usuarios/**").hasAuthority("ADMIN") 
+    .antMatchers(HttpMethod.GET, "/api/login").permitAll()
+    .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+    .anyRequest().authenticated()
+    .and().cors()
+    .and().httpBasic()
+    .and().csrf().disable()
+    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    ;
   }
 
   /** Teste de configurações anteriores
