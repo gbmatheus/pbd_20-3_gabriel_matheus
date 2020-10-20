@@ -1,5 +1,6 @@
 package com.gabrielmatheus.eniatusapi.domain.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.gabrielmatheus.eniatusapi.domain.models.Funcionario;
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
   
-  // Optional<Funcionario> findByCod_funcionario(String cod_funcionario);
   Optional<Funcionario> findByPessoa(Pessoa pessoa);
+
+  List<Funcionario> findByAtivo(Boolean ativo);
   
 }

@@ -6,8 +6,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.gabrielmatheus.eniatusapi.domain.models.Funcionario;
-import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioService;
-import com.gabrielmatheus.eniatusapi.domain.services.FuncionarioServices.CadastroFuncionarioService;
+import com.gabrielmatheus.eniatusapi.domain.repositories.FuncionarioRepository;
+import com.gabrielmatheus.eniatusapi.domain.services.funcionario.FuncionarioService;
+import com.gabrielmatheus.eniatusapi.domain.services.funcionario.CadastroFuncionarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,15 +27,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/funcionarios")
 public class FuncionarioController {
 
-  @Autowired
-  private FuncionarioService funcionarioService;
+  private final FuncionarioRepository funcionarioRepository;
+  private final FuncionarioService funcionarioService;
+  private final CadastroFuncionarioService cadastroFuncionarioService;
 
   @Autowired
-  private CadastroFuncionarioService cadastroFuncionarioService;
-
+  public FuncionarioController(FuncionarioRepository funcionarioRepository, FuncionarioService funcionarioService,
+      CadastroFuncionarioService cadastroFuncionarioService) {
+    this.funcionarioRepository = funcionarioRepository;
+    this.funcionarioService = funcionarioService;
+    this.cadastroFuncionarioService = cadastroFuncionarioService;
+  }
+  
   @GetMapping
   public List<Funcionario> index() {
-    return funcionarioService.findAll();
+    List<Funcionario> funcionarios = funcionarioRepository.findByAtivo(true);
+
+    // return funcionarioService.findAll();
+    return funcionarios;
   }
 
   @PostMapping
@@ -53,27 +63,34 @@ public class FuncionarioController {
 
     return ResponseEntity.notFound().build();
 
-  }  
+  }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Funcionario> update(@PathVariable Long id,
-    @RequestBody Funcionario f) {
-      
-      Funcionario funcionario = funcionarioService.update(f, id);
+  public ResponseEntity<Funcionario> update(@PathVariable Long id, @Valid @RequestBody Funcionario f) {
+    Funcionario funcionario = funcionarioService.update(f, id);
 
-      if(funcionario == null)
-        return ResponseEntity.notFound().build();
+    if (funcionario == null)
+      return ResponseEntity.notFound().build();
 
-      return ResponseEntity.ok(funcionario);
-    }
+    return ResponseEntity.ok(funcionario);
+  }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete (@PathVariable Long id) {
-    if(!funcionarioService.delete(id)) {
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
+    if (!funcionarioService.delete(id)) {
       return ResponseEntity.notFound().build();
     }
 
     return ResponseEntity.noContent().build();
   }
-  
+
+  @DeleteMapping("/desativar/{id}")
+  public ResponseEntity<Void> desactivate(@PathVariable Long id) {
+    if (!funcionarioService.deactivate(id)) {
+      return ResponseEntity.notFound().build();
+    }
+    
+    return ResponseEntity.noContent().build();
+  }
+
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.gabrielmatheus.eniatusapi.domain.models.SalarioFamilia;
-import com.gabrielmatheus.eniatusapi.domain.services.SalarioFamiliaService;
+import com.gabrielmatheus.eniatusapi.domain.services.salarios.SalarioFamiliaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,9 +41,9 @@ public class SalarioFamiliaController {
     return salarioFamilia;
   }
 
-  @GetMapping("/{salarioID}")
-  public ResponseEntity<SalarioFamilia> show(@PathVariable Long salarioID) {
-    Optional<SalarioFamilia> salarioFamilia = salarioFamiliaService.findById(salarioID);
+  @GetMapping("/{id}")
+  public ResponseEntity<SalarioFamilia> show(@PathVariable Long id) {
+    Optional<SalarioFamilia> salarioFamilia = salarioFamiliaService.findById(id);
 
     if(!salarioFamilia.isPresent()){
       return ResponseEntity.notFound().build();
@@ -52,11 +52,11 @@ public class SalarioFamiliaController {
     return ResponseEntity.ok(salarioFamilia.get());
   }
 
-  @PutMapping("/{salarioID}")
+  @PutMapping("/{id}")
   public ResponseEntity<SalarioFamilia> update (@Valid @RequestBody SalarioFamilia sf,
-    @PathVariable Long salarioID) {
+    @PathVariable Long id) {
     
-    SalarioFamilia salarioFamilia = salarioFamiliaService.update(sf, salarioID);
+    SalarioFamilia salarioFamilia = salarioFamiliaService.update(sf, id);
     
     if(salarioFamilia == null){
       return ResponseEntity.notFound().build();
@@ -65,9 +65,9 @@ public class SalarioFamiliaController {
     return ResponseEntity.ok(salarioFamilia);
   }
 
-  @DeleteMapping("/{salarioID}")
-  public ResponseEntity<Void> delete (@PathVariable Long salarioID) {
-    if(!salarioFamiliaService.delete(salarioID)) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete (@PathVariable Long id) {
+    if(!salarioFamiliaService.delete(id)) {
       return ResponseEntity.notFound().build();
     }
 
